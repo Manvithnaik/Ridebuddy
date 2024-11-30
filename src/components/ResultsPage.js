@@ -2,17 +2,15 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const ResultsPage = ({ emissions }) => {
-  const { petrol, diesel, ev } = emissions; // Assuming emissions data is passed as {petrol, diesel, ev}
+  const { co2Savings, fuelAdjustment, trafficAdjustment, idleEmissions } = emissions;
 
   const emissionData = [
-    { name: 'Petrol', emissions: petrol },
-    { name: 'Diesel', emissions: diesel },
-    { name: 'EV', emissions: ev }
+    { name: 'CO2 Savings', emissions: co2Savings },
   ];
 
   return (
     <div className="results-container">
-      <h3>Emission Comparison by Fuel Type</h3>
+      <h3>Emission Comparison</h3>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={emissionData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -25,8 +23,10 @@ const ResultsPage = ({ emissions }) => {
       </ResponsiveContainer>
 
       <div className="carbon-savings">
-        <h4>Total Carbon Emissions: {petrol.toFixed(2)} grams</h4>
-        <h4>Carbon Savings: {petrol > 0 ? (petrol * 0.8).toFixed(2) : 0} grams</h4>
+        <h4>Total CO2 Savings: {co2Savings.toFixed(2)} grams</h4>
+        <h4>Fuel Adjustment: {fuelAdjustment}</h4>
+        <h4>Traffic Adjustment: {trafficAdjustment}</h4>
+        <h4>Idle Emissions: {idleEmissions} grams</h4>
       </div>
     </div>
   );
